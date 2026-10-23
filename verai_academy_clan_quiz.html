@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#650d1b">
+<title>Verai Academy — Crimson & Gold Clan Quiz</title>
+<style>
+
+:root{
+  --bg:#520b17;
+  --bg-deep:#31050d;
+  --panel:#710f21;
+  --panel-soft:#7f1729;
+  --ink:#fff5e6;
+  --muted:#e2c8a0;
+  --accent:#d5a84f;
+  --accent2:#8d1c2e;
+  --line:#b78a3e;
+  --gold-light:#f5d98c;
+  --shadow:0 12px 35px rgba(15,0,4,.38)
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;
+  background:
+    radial-gradient(ellipse at top,rgba(173,43,57,.30),transparent 55%),
+    linear-gradient(135deg,var(--bg),var(--bg-deep));
+  color:var(--ink);
+  font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;
+  padding:clamp(20px,4vw,42px) 16px;
+  position:relative;isolation:isolate
+}
+body:before,body:after{
+  content:"";position:fixed;pointer-events:none;z-index:-1;
+  inset:10px;border:1px solid rgba(213,168,79,.8);border-radius:5px
+}
+body:after{
+  inset:17px;border:1px solid rgba(245,217,140,.35)
+}
+main{max-width:760px;margin:0 auto;position:relative}
+main:before,main:after{
+  content:"✦ ❧";position:fixed;z-index:2;pointer-events:none;
+  color:var(--gold-light);font-family:Georgia,serif;font-size:20px;
+  letter-spacing:5px;opacity:.85
+}
+main:before{top:22px;left:25px;transform:rotate(-90deg);transform-origin:left top}
+main:after{right:24px;bottom:22px;transform:rotate(90deg);transform-origin:right bottom}
+header{text-align:center;margin:12px 0 24px}
+.crest{
+  width:78px;height:78px;border:2px solid var(--accent);border-radius:50%;
+  margin:0 auto 12px;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 25%,#9c2938,#4b0814);
+  color:var(--gold-light);font-size:34px;
+  box-shadow:0 0 0 5px rgba(213,168,79,.09),inset 0 0 0 4px rgba(213,168,79,.18)
+}
+.kicker{letter-spacing:.18em;font-size:.72rem;color:var(--gold-light);font-weight:800}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.8rem,6vw,2.7rem);line-height:1.15;margin:8px 0;color:#f7d98d;text-shadow:0 2px 12px rgba(0,0,0,.25)}
+.subtitle{color:var(--muted);margin:8px 0 0}
+.card{
+  position:relative;background:linear-gradient(145deg,rgba(126,22,42,.98),rgba(76,8,21,.98));
+  border:1px solid var(--accent);border-radius:5px;
+  padding:clamp(18px,4vw,30px);
+  box-shadow:var(--shadow);outline:1px solid rgba(245,217,140,.24);outline-offset:5px
+}
+.card:before,.card:after{
+  content:"❧";position:absolute;color:var(--gold-light);font-size:22px;line-height:1
+}
+.card:before{top:7px;left:10px}
+.card:after{bottom:7px;right:10px;transform:rotate(180deg)}
+.langs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:20px 0 24px}
+.lang{
+  border:1px solid var(--line);background:#4d0915;color:var(--ink);
+  border-radius:3px;padding:9px 15px;font-weight:700;cursor:pointer
+}
+.lang.active{background:var(--accent);border-color:var(--gold-light);color:#3b0710;box-shadow:0 0 0 2px rgba(213,168,79,.15)}
+.progressline{height:7px;background:#3d0711;border:1px solid rgba(213,168,79,.45);border-radius:2px;overflow:hidden;margin:12px 0 22px}
+#progress{height:100%;width:0;background:linear-gradient(90deg,#b7822c,#f5d98c);transition:width .2s}
+.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:.88rem;gap:12px}
+h2{font-size:1.3rem;line-height:1.35;margin:10px 0 18px;color:#ffedc6}
+.answers{display:grid;gap:10px}
+.answer{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;
+  padding:13px 14px;border:1px solid rgba(213,168,79,.55);border-radius:3px;
+  background:rgba(49,5,13,.55);color:var(--ink);font:inherit;cursor:pointer;
+  transition:background .15s,border-color .15s,transform .15s
+}
+.answer:hover{border-color:var(--gold-light);background:rgba(149,32,48,.65)}
+.answer.selected{border-color:var(--gold-light);background:#8d1c2e;box-shadow:inset 0 0 0 1px var(--accent),0 0 0 2px rgba(213,168,79,.12)}
+.letter{
+  flex:0 0 27px;height:27px;display:grid;place-items:center;
+  border:1px solid var(--line);border-radius:50%;font-size:.85rem;font-weight:800;color:var(--gold-light)
+}
+.answer.selected .letter{background:var(--accent);color:#3b0710;border-color:var(--gold-light)}
+.controls{display:flex;gap:10px;margin-top:22px}
+button.primary,button.secondary{border-radius:3px;padding:12px 16px;font:inherit;font-weight:800;cursor:pointer;transition:filter .15s}
+.primary{background:linear-gradient(135deg,#f0ce78,#bd8730);color:#390711;border:1px solid #f7df9b;flex:1;box-shadow:0 4px 12px rgba(0,0,0,.16)}
+.primary:hover{filter:brightness(1.07)}
+.primary:disabled{opacity:.45;cursor:not-allowed}
+.secondary{background:#4b0814;color:var(--ink);border:1px solid var(--line)}
+.note{color:var(--muted);font-size:.85rem;margin:14px 0 0}
+.result{text-align:center}
+.result-icon{font-size:54px;margin:8px 0;color:var(--gold-light)}
+.result h2{font-family:Georgia,"Times New Roman",serif;font-size:2rem;margin:5px 0;color:#f7d98d}
+.result .trait{font-size:1.1rem;color:var(--gold-light)}
+.result .tie{margin:12px 0;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:.8rem;margin:24px 0 18px}
+[hidden]{display:none!important}
+@media(max-width:480px){
+  body{padding:24px 20px}
+  body:before{inset:7px}
+  body:after{inset:12px}
+  main:before,main:after{font-size:15px}
+  .controls{gap:8px}
+  button.primary,button.secondary{padding:11px 12px}
+}
+
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="crest" aria-hidden="true">✧</div>
+  <div class="kicker">VERAI ACADEMY</div>
+  <h1 id="pageTitle">Discover Your Clan</h1>
+  <p class="subtitle" id="subtitle">15 questions · 10 clans · Find where you belong</p>
+  <div class="langs" role="group" aria-label="Choose language">
+    <button class="lang active" data-lang="en">English</button>
+    <button class="lang" data-lang="ja">日本語</button>
+    <button class="lang" data-lang="ar">العربية</button>
+  </div>
+</header>
+<section class="card" id="intro">
+  <h2 id="introTitle">Which clan reflects your personality?</h2>
+  <p id="introText">Answer 15 questions honestly. Your answers will determine your closest clan.</p>
+  <button class="primary" id="startBtn">Begin the quiz</button>
+</section>
+<section class="card" id="quiz" hidden>
+  <div class="meta"><span id="questionCount">Question 1 of 15</span><span id="percent">7%</span></div>
+  <div class="progressline"><div id="progress"></div></div>
+  <h2 id="questionText"></h2>
+  <div class="answers" id="answers"></div>
+  <p class="note" id="chooseNote">Choose one answer to continue.</p>
+  <div class="controls">
+    <button class="secondary" id="backBtn">Previous</button>
+    <button class="primary" id="nextBtn" disabled>Next question</button>
+  </div>
+</section>
+<section class="card result" id="result" hidden>
+  <div class="result-icon" aria-hidden="true">✧</div>
+  <p class="kicker" id="resultKicker">YOUR RESULT</p>
+  <h2 id="resultName"></h2>
+  <p class="trait" id="resultTrait"></p>
+  <p id="resultDesc"></p>
+  <p class="tie" id="tieText"></p>
+  <button class="primary" id="restartBtn">Try again</button>
+</section>
+<footer>Verai Academy · Clan Personality Quiz</footer>
+</main>
+<script>
+const clans = [
+ {id:0, emoji:"☾", names:{en:"Moon",ja:"月の一族",ar:"القمر"}, traits:{en:"Strength and steadiness",ja:"強さと揺るがなさ",ar:"القوة والثبات"}, desc:{en:"You value strength and staying steady when life gets difficult.",ja:"困難なときも強さと安定を大切にします。",ar:"تقدّرين القوة والثبات عندما تصبح الحياة صعبة."}},
+ {id:1, emoji:"◈", names:{en:"Darkness",ja:"闇の一族",ar:"الظلام"}, traits:{en:"Sharp thinking",ja:"鋭い思考力",ar:"حدة التفكير"}, desc:{en:"You prefer to analyze situations and think things through.",ja:"状況を分析し、深く考えることを好みます。",ar:"تفضّلين تحليل المواقف والتفكير فيها بعمق."}},
+ {id:2, emoji:"♦", names:{en:"Blood",ja:"血の一族",ar:"الدم"}, traits:{en:"Impulsiveness",ja:"衝動性",ar:"الاندفاع"}, desc:{en:"You tend to act quickly rather than wait too long.",ja:"長く待つより、素早く行動する傾向があります。",ar:"تميلين إلى التصرف بسرعة بدلًا من الانتظار طويلًا."}},
+ {id:3, emoji:"❀", names:{en:"Butterfly",ja:"蝶の一族",ar:"الفراشة"}, traits:{en:"Elegance",ja:"気品",ar:"الأناقة"}, desc:{en:"You appreciate refinement, grace, and elegance.",ja:"洗練された振る舞いや優雅さを大切にします。",ar:"تقدّرين الرقي واللطف والأناقة."}},
+ {id:4, emoji:"❋", names:{en:"Plant",ja:"植物の一族",ar:"النبات"}, traits:{en:"Purity and beauty",ja:"純粋さと美しさ",ar:"النقاء والجمال"}, desc:{en:"You are drawn to purity, kindness, and beauty.",ja:"純粋さ、優しさ、美しさに惹かれます。",ar:"تنجذبين إلى النقاء واللطف والجمال."}},
+ {id:5, emoji:"❄", names:{en:"Snow",ja:"雪の一族",ar:"الثلج"}, traits:{en:"Calm and self-control",ja:"冷静さと自制心",ar:"الهدوء وضبط النفس"}, desc:{en:"You try to remain composed and control your reactions.",ja:"落ち着きを保ち、自分の反応をコントロールしようとします。",ar:"تحاولين الحفاظ على هدوئك والتحكم في ردود أفعالك."}},
+ {id:6, emoji:"♨", names:{en:"Fire",ja:"炎の一族",ar:"النار"}, traits:{en:"Anger and impulsiveness",ja:"怒りと衝動性",ar:"الغضب والاندفاع"}, desc:{en:"Strong anger can push you toward immediate action.",ja:"強い怒りが、すぐに行動するきっかけになることがあります。",ar:"قد يدفعك الغضب الشديد إلى التصرف فورًا."}},
+ {id:7, emoji:"≈", names:{en:"Water",ja:"水の一族",ar:"الماء"}, traits:{en:"Calmness",ja:"穏やかさ",ar:"الهدوء"}, desc:{en:"You value peace and a calm approach to situations.",ja:"穏やかさと落ち着いた対応を大切にします。",ar:"تقدّرين السلام والتعامل الهادئ مع المواقف."}},
+ {id:8, emoji:"〰", names:{en:"Wind",ja:"風の一族",ar:"الرياح"}, traits:{en:"Determination",ja:"決意",ar:"العزيمة"}, desc:{en:"You keep moving toward your goal with determination.",ja:"決意を持って目標へ進み続けます。",ar:"تواصلين التقدم نحو هدفك بعزيمة."}},
+ {id:9, emoji:"⬟", names:{en:"Rock",ja:"岩の一族",ar:"الصخر"}, traits:{en:"Rigidity and stubbornness",ja:"頑固さと硬直性",ar:"الصلابة والعناد"}, desc:{en:"You can be firm in your position and reluctant to change it.",ja:"自分の立場を強く守り、簡単には変えないことがあります。",ar:"قد تتمسكين بموقفك وتترددين في تغييره."}}
+];
+const data = {
+en:{title:"Discover Your Clan",subtitle:"15 questions · 10 clans · Find where you belong",introTitle:"Which clan reflects your personality?",introText:"Answer 15 questions honestly. Your answers will determine your closest clan.",start:"Begin the quiz",progress:"Question",of:"of",choose:"Choose one answer to continue.",back:"Previous",next:"Next question",finish:"Reveal my clan",result:"YOUR RESULT",again:"Try again",tie:"Your answers connect you with more than one clan.",qs:[
+["When you face a difficult problem, what do you do first?",["Analyze the details and look for a logical solution.","Face it directly and rely on my strength.","Stay calm until I understand the situation.","Act quickly and handle the consequences later."]],
+["Which scene attracts you most?",["The moon shining steadily in the night sky.","A still lake that barely moves.","Flames dancing in the dark.","An elegant butterfly among flowers."]],
+["When someone provokes you, how do you react?",["Think before deciding how to respond.","Get angry and sometimes react impulsively.","Hold my position and rarely change my mind.","Stay calm and control my reaction."]],
+["What helps you continue when things become difficult?",["My determination to reach my goal.","My strength and ability to face challenges.","My sharp thinking and ability to find another way.","My calmness and self-control."]],
+["Which quality do you value most in others?",["Grace and elegance in their behavior.","Purity, kindness, and inner beauty.","Strength and steadiness in hard times.","The ability to think clearly."]],
+["When you disagree with someone close to you, what do you do?",["Stand by my opinion if I believe it is right.","Try to understand their perspective before replying.","My emotions may take over and make me speak impulsively.","Handle the disagreement calmly."]],
+["Choose a place for a peaceful day.",["A garden full of flowers and plants.","A high place with a wide view.","An elegant, carefully arranged room.","A cool, quiet place to clear my mind."]],
+["What matters most when making a major decision?",["Thinking carefully about the consequences.","Having the courage to decide.","Never abandoning my goal.","Acting quickly when the moment demands it."]],
+["What is hardest for you to accept?",["Someone ignoring clear logic.","Being pressured to abandon my position.","Losing control of my anger.","Seeing purity and beauty met with cruelty."]],
+["When a conflict starts in a group, what do you do?",["Analyze the causes and look for a solution.","Try to calm everyone down.","Defend my position or someone I care about.","Insist on the solution I believe is right."]],
+["Which image best represents your way of life?",["Flames burning fiercely in the wind.","Water flowing quietly along its path.","A rock that is difficult to move.","Wind continuing forward without stopping."]],
+["When you feel angry, what is most like you?",["Act quickly because my emotions are intense.","Control my reaction before speaking.","Analyze what caused the problem.","Cling to my position and find it hard to give in."]],
+["What impression would you most like to leave?",["A strong and steady person.","A refined and elegant person.","A pure-hearted person with inner beauty.","A sharp-minded person who is hard to fool."]],
+["If your first attempt fails, what do you do?",["Analyze what happened and find another method.","Keep going with determination.","Try again quickly without overthinking.","Stick to my method and resist changing it."]],
+["Which describes you best in a difficult situation?",["Calm, with control over my reactions.","Strong, facing whatever stands in my way.","Impulsive when anger takes over.","Determined and unwilling to give up."]]]},
+ja:{title:"あなたの一族を見つけよう",subtitle:"15の質問 · 10の一族 · あなたに合う一族を発見",introTitle:"あなたの性格に合う一族は？",introText:"15の質問に答えて、あなたに最も近い一族を見つけましょう。",start:"診断を始める",progress:"質問",of:"/",choose:"回答を1つ選んでください。",back:"前の質問",next:"次の質問",finish:"結果を見る",result:"診断結果",again:"もう一度診断する",tie:"複数の一族と共通する特徴があります。",qs:[
+["難しい問題に直面したとき、まず何をしますか？",["細部を分析し、論理的な解決策を探す。","正面から立ち向かい、自分の力を信じる。","状況を理解するまで落ち着いて考える。","すぐに行動し、その後のことは後で考える。"]],
+["最も惹かれる光景はどれですか？",["夜空を静かに照らす月。","ほとんど動かない静かな湖。","暗闇の中で揺れる炎。","花々の間を舞う優雅な蝶。"]],
+["誰かに挑発されたら、どう反応しますか？",["返答を考えてから決める。","怒りを感じ、衝動的に反応することもある。","自分の立場を守り、簡単には意見を変えない。","落ち着いて反応を抑える。"]],
+["困難なとき、前に進む力になるものは？",["目標を達成しようとする決意。","立ち向かうための強さ。","鋭い思考力と別の道を見つける力。","冷静さと自制心。"]],
+["他人のどんなところを最も大切にしますか？",["振る舞いに表れる気品。","純粋さ、優しさ、内面の美しさ。","困難なときの強さと安定感。","物事を明確に考える力。"]],
+["親しい人と意見が違ったら、どうしますか？",["正しいと思うなら自分の意見を守る。","返答する前に相手の考えを理解する。","感情が先に立ち、衝動的に話すことがある。","落ち着いて意見の違いに向き合う。"]],
+["穏やかな一日を過ごすなら、どこを選びますか？",["花や植物に囲まれた庭。","遠くまで見渡せる高い場所。","上品に整えられた部屋。","心を落ち着かせられる涼しく静かな場所。"]],
+["重大な決断で最も大切なのは？",["結果を慎重に考えること。","決断する勇気。","目標を決して諦めないこと。","必要なときに素早く行動すること。"]],
+["最も受け入れがたいことは何ですか？",["明らかな論理を無視されること。","自分の立場を変えるよう迫られること。","怒りを抑えられなくなること。","純粋さや美しさが残酷さにさらされること。"]],
+["集団の中で対立が起きたら、どうしますか？",["原因を分析し、解決策を探す。","みんなを落ち着かせようとする。","自分の立場や大切な人を守る。","正しいと思う解決策を貫く。"]],
+["自分の生き方に近いイメージは？",["風の中で燃え上がる炎。","静かに流れていく水。","簡単には動かない岩。","止まることなく進み続ける風。"]],
+["怒りを感じたとき、どんな反応をしがちですか？",["感情が強くなり、すぐに行動する。","話す前に反応を抑えようとする。","問題の原因を分析する。","自分の立場に固執し、譲らない。"]],
+["どんな印象を人に残したいですか？",["強く、揺るがない人。","上品で優雅な人。","純粋で心の美しい人。","鋭い思考力を持ち、だまされにくい人。"]],
+["最初の挑戦に失敗したら、どうしますか？",["何が起きたか分析し、別の方法を探す。","決意を持って進み続ける。","深く考えすぎず、すぐに再挑戦する。","やり方を変えず、自分の方法を守る。"]],
+["困難な状況でのあなたに最も近いのは？",["冷静で、自分の反応を制御できる。","強く、立ちはだかるものに立ち向かう。","怒りに駆られると衝動的になる。","決意が固く、簡単には諦めない。"]]]},
+ar:{title:"اكتشفي عشيرتك",subtitle:"15 سؤالًا · 10 عشائر · اكتشفي العشيرة الأقرب إليك",introTitle:"أي عشيرة تعكس شخصيتك؟",introText:"أجيبي عن الأسئلة الخمسة عشر بصدق لتكتشفي العشيرة الأقرب إلى شخصيتك.",start:"ابدئي الاختبار",progress:"السؤال",of:"من",choose:"اختاري إجابة واحدة للمتابعة.",back:"السابق",next:"السؤال التالي",finish:"اكشفي عن عشيرتي",result:"نتيجتك",again:"أعيدي الاختبار",tie:"إجاباتك تجمع صفات من أكثر من عشيرة.",qs:[
+["عندما تواجهين مشكلة صعبة، ماذا تفعلين أولًا؟",["أحلل التفاصيل وأبحث عن حل منطقي.","أواجهها مباشرة وأعتمد على قوتي.","أحافظ على هدوئي حتى أفهم الموقف.","أتصرف بسرعة وأتعامل مع العواقب لاحقًا."]],
+["أي مشهد يجذبك أكثر؟",["القمر يضيء سماء الليل بثبات.","بحيرة ساكنة بالكاد تتحرك.","ألسنة لهب تتراقص في الظلام.","فراشة أنيقة بين الأزهار."]],
+["كيف تتصرفين عندما يستفزك أحد؟",["أفكر قبل أن أقرر كيف أرد.","أغضب وقد أتصرف باندفاع أحيانًا.","أتمسك بموقفي ونادرًا ما أغير رأيي.","أحافظ على هدوئي وأضبط رد فعلي."]],
+["ما الذي يساعدك على الاستمرار عندما تشتد الصعوبات؟",["عزيمتي على بلوغ هدفي.","قوتي وقدرتي على مواجهة التحديات.","تفكيري الحاد وقدرتي على إيجاد طريق آخر.","هدوئي وقدرتي على ضبط نفسي."]],
+["ما الصفة التي تقدّرينها أكثر في الآخرين؟",["الرقي والأناقة في التصرف.","النقاء واللطف والجمال الداخلي.","القوة والثبات في الأوقات الصعبة.","القدرة على التفكير بوضوح."]],
+["إذا اختلفتِ مع شخص مقرّب، ماذا تفعلين؟",["أتمسك برأيي إن كنت أعتقد أنه صحيح.","أحاول فهم وجهة نظره قبل الرد.","قد تسيطر عليّ مشاعري فأتكلم باندفاع.","أتعامل مع الخلاف بهدوء."]],
+["اختاري مكانًا لقضاء يوم هادئ.",["حديقة مليئة بالأزهار والنباتات.","مكان مرتفع يطل على منظر واسع.","غرفة أنيقة ومرتبة بعناية.","مكان بارد وهادئ لأصفّي ذهني."]],
+["ما الأهم عند اتخاذ قرار مصيري؟",["التفكير جيدًا في العواقب.","امتلاك الشجاعة لاتخاذ القرار.","ألا أتخلى عن هدفي أبدًا.","التصرف بسرعة عندما يتطلب الموقف ذلك."]],
+["ما أصعب شيء عليك تقبّله؟",["أن يتجاهل أحدهم المنطق الواضح.","أن يضغط عليّ أحد للتخلي عن موقفي.","أن أفقد السيطرة على غضبي.","أن يُقابَل النقاء والجمال بالقسوة."]],
+["إذا نشب خلاف داخل مجموعة، ماذا تفعلين؟",["أحلل الأسباب وأبحث عن حل.","أحاول تهدئة الجميع.","أدافع عن موقفي أو عن شخص يهمني.","أصرّ على الحل الذي أراه صحيحًا."]],
+["أي صورة تمثل أسلوب حياتك أكثر؟",["لهب يشتعل بقوة في مهب الريح.","ماء يجري بهدوء في مساره.","صخرة يصعب تحريكها.","ريح تواصل التقدم دون توقف."]],
+["عندما تشعرين بالغضب، أي وصف يشبهك؟",["أتصرف بسرعة لأن مشاعري قوية.","أضبط رد فعلي قبل الكلام.","أحلل سبب المشكلة.","أتمسك بموقفي ويصعب عليّ التراجع."]],
+["ما الانطباع الذي تودين تركه؟",["شخصية قوية وثابتة.","شخصية راقية وأنيقة.","شخصية نقية القلب وجميلة الروح.","شخصية حادة الذكاء يصعب خداعها."]],
+["إذا فشلت محاولتك الأولى، ماذا تفعلين؟",["أحلل ما حدث وأبحث عن طريقة أخرى.","أواصل التقدم بعزيمة.","أحاول مجددًا بسرعة دون إفراط في التفكير.","أتمسك بطريقتي وأقاوم تغييرها."]],
+["أي وصف يناسبك أكثر في موقف صعب؟",["هادئة وأتحكم في ردود أفعالي.","قوية وأواجه كل ما يعترض طريقي.","أندفع عندما يسيطر عليّ الغضب.","حازمة ولا أستسلم بسهولة."]]]}
+};
+/* Each answer is associated with a clan index. These are prototype mappings and should be reviewed before public release. */
+const mapping = [
+ [1,0,7,2],[0,7,6,3],[1,6,9,5],[8,0,1,5],[3,4,0,1],
+ [9,1,6,7],[4,0,3,5],[1,0,8,2],[1,9,6,4],[1,7,0,9],
+ [6,7,9,8],[2,5,1,9],[0,3,4,1],[1,8,2,9],[5,0,6,8]
+];
+let language="en", current=0, answers=Array(15).fill(null);
+const $=id=>document.getElementById(id);
+function setLanguage(lang){language=lang;document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";document.querySelectorAll(".lang").forEach(b=>b.classList.toggle("active",b.dataset.lang===lang));renderText();if(!$("quiz").hidden)renderQuestion();if(!$("result").hidden&&answers.every(a=>a!==null))renderResult();}
+function renderText(){const d=data[language];$("pageTitle").textContent=d.title;$("subtitle").textContent=d.subtitle;$("introTitle").textContent=d.introTitle;$("introText").textContent=d.introText;$("startBtn").textContent=d.start;$("backBtn").textContent=d.back;$("restartBtn").textContent=d.again;$("resultKicker").textContent=d.result;}
+function renderQuestion(){const d=data[language];$("questionCount").textContent=`${d.progress} ${current+1} ${d.of} 15`;$("percent").textContent=`${Math.round((current+1)/15*100)}%`;$("progress").style.width=`${(current+1)/15*100}%`;$("questionText").textContent=d.qs[current][0];$("chooseNote").textContent=d.choose;$("answers").innerHTML="";d.qs[current][1].forEach((txt,i)=>{const b=document.createElement("button");b.className="answer"+(answers[current]===i?" selected":"");b.type="button";const letter=document.createElement("span");letter.className="letter";letter.textContent="ABCD"[i];const text=document.createElement("span");text.textContent=txt;b.append(letter,text);b.onclick=()=>{answers[current]=i;renderQuestion()};$("answers").appendChild(b)});$("backBtn").disabled=current===0;$("nextBtn").disabled=answers[current]===null;$("nextBtn").textContent=current===14?d.finish:d.next;}
+function show(view){["intro","quiz","result"].forEach(id=>$(id).hidden=id!==view);}
+function renderResult(){const d=data[language],scores=Array(10).fill(0);answers.forEach((a,i)=>{if(a!==null)scores[mapping[i][a]]++});const max=Math.max(...scores);const winners=scores.map((s,i)=>s===max?i:-1).filter(i=>i>=0);$("resultName").textContent=winners.map(i=>clans[i].emoji+" "+clans[i].names[language]).join(" · ");$("resultTrait").textContent=winners.map(i=>clans[i].traits[language]).join(" · ");$("resultDesc").textContent=winners.map(i=>clans[i].desc[language]).join(" ");$("tieText").textContent=winners.length>1?d.tie:"";show("result");}
+document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>setLanguage(b.dataset.lang)));
+$("startBtn").addEventListener("click",()=>{current=0;answers=Array(15).fill(null);show("quiz");renderQuestion()});
+$("backBtn").addEventListener("click",()=>{if(current>0){current--;renderQuestion()}});
+$("nextBtn").addEventListener("click",()=>{if(answers[current]===null)return;if(current<14){current++;renderQuestion()}else renderResult()});
+$("restartBtn").addEventListener("click",()=>{current=0;answers=Array(15).fill(null);show("intro")});
+document.documentElement.dir=language==="ar"?"rtl":"ltr";
+document.documentElement.dir=language==="ar"?"rtl":"ltr";
+renderText();
+</script>
+</body>
+</html>
