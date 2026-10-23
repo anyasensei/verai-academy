@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#4b0714">
+<title>Fairia Academy — Crimson & Gold Theme</title>
+<style>
+  :root{
+    --crimson:#4b0714;
+    --crimson-deep:#27040b;
+    --crimson-mid:#650d20;
+    --gold:#d8b15d;
+    --gold-light:#f2d995;
+    --cream:#fff0e5;
+    --muted:#e6c9c5;
+    --panel:rgba(35,3,10,.45);
+  }
+  *{box-sizing:border-box}
+  html{min-height:100%;background:var(--crimson-deep)}
+  body{
+    margin:0;min-height:100vh;color:var(--cream);
+    font-family:Georgia,"Times New Roman",serif;
+    background:
+      radial-gradient(ellipse at 50% 0%,rgba(143,24,48,.55),transparent 55%),
+      linear-gradient(145deg,#30050d 0%,#5b0a1a 48%,#31050d 100%);
+    padding:22px 14px 36px;
+  }
+  .site{max-width:860px;margin:auto;position:relative}
+  .frame{
+    position:relative;border:1px solid var(--gold);
+    outline:1px solid rgba(216,177,93,.35);outline-offset:5px;
+    padding:clamp(18px,5vw,42px);background:rgba(54,4,15,.35);
+    box-shadow:0 18px 55px #170107aa,inset 0 0 0 5px #d8b15d0b;
+  }
+  .frame:before,.frame:after{
+    content:"✦  ❧";position:absolute;color:var(--gold-light);
+    font-size:19px;letter-spacing:3px;line-height:1;
+  }
+  .frame:before{top:10px;left:12px}
+  .frame:after{bottom:10px;right:12px;transform:rotate(180deg)}
+  .corner{position:absolute;width:28px;height:28px;border-color:var(--gold-light);opacity:.9}
+  .tl{top:5px;left:5px;border-top:2px solid;border-left:2px solid}
+  .tr{top:5px;right:5px;border-top:2px solid;border-right:2px solid}
+  .bl{bottom:5px;left:5px;border-bottom:2px solid;border-left:2px solid}
+  .br{bottom:5px;right:5px;border-bottom:2px solid;border-right:2px solid}
+  .ornament{color:var(--gold);text-align:center;letter-spacing:5px;margin:12px 0}
+  header{text-align:center;padding:15px 0 24px}
+  .eyebrow{font-size:.76rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-light)}
+  h1{font-size:clamp(2rem,7vw,3.5rem);font-weight:normal;letter-spacing:.08em;color:var(--gold-light);margin:14px 0 5px;text-shadow:0 3px 16px #160006}
+  .jp{font-size:1.1rem;letter-spacing:.25em;color:#f1d9a2;margin:8px 0}
+  .subtitle{color:var(--muted);font-family:Arial,sans-serif;font-size:.92rem}
+  .language-label{text-align:center;color:var(--gold-light);font: .78rem Arial,sans-serif;letter-spacing:.1em;margin:6px 0 12px}
+  .languages{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-bottom:28px}
+  button{font:inherit;cursor:pointer}
+  .lang{
+    color:var(--cream);background:#31050d;border:1px solid #a77b36;
+    padding:9px 14px;border-radius:2px;transition:.2s
+  }
+  .lang:hover,.lang.active{background:#7b1228;border-color:var(--gold-light);color:#fff3c9;box-shadow:0 0 0 2px #d8b15d20}
+  nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+  .nav-button{
+    display:flex;min-height:112px;align-items:center;justify-content:center;flex-direction:column;gap:9px;
+    padding:20px 12px;text-align:center;text-decoration:none;color:var(--cream);
+    border:1px solid var(--gold);outline:1px solid #d8b15d33;outline-offset:3px;
+    background:linear-gradient(145deg,#76152a99,#32050dcc);
+    transition:transform .18s,background .18s,box-shadow .18s;
+  }
+  .nav-button:hover{transform:translateY(-2px);background:linear-gradient(145deg,#8b1a32,#4a0717);box-shadow:0 8px 22px #17010777}
+  .symbol{font-size:1.45rem;color:var(--gold-light);line-height:1}
+  .nav-title{font-size:clamp(1rem,3vw,1.22rem);color:var(--gold-light)}
+  .nav-sub{font: .85rem Arial,sans-serif;color:#f4dcd7}
+  footer{text-align:center;color:#d8b15d;font-size:.75rem;letter-spacing:.15em;margin-top:30px}
+  .note{font: .8rem/1.5 Arial,sans-serif;color:#e4c5c3;text-align:center;margin:20px auto 0;max-width:560px}
+  @media(max-width:430px){nav{grid-template-columns:1fr}.nav-button{min-height:92px}.frame{padding:24px 17px}}
+</style>
+</head>
+<body>
+<main class="site">
+  <div class="frame">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <header>
+      <div class="eyebrow" data-i18n="eyebrow">A WORLD OF ASHES AND REVOLUTION</div>
+      <h1>VERAI ACADEMY</h1>
+      <div class="jp">ベリアアカデミー</div>
+      <div class="subtitle" data-i18n="subtitle">Revolution in the Age of Ashes</div>
+      <div class="ornament">✧ ───── ☾ ───── ✧</div>
+    </header>
+    <div class="language-label" data-i18n="choose">CHOOSE YOUR LANGUAGE · 言語を選択 · اختر لغتك</div>
+    <div class="languages" aria-label="Choose language">
+      <button class="lang" data-lang="ar" type="button">العربية</button>
+      <button class="lang active" data-lang="en" type="button">English</button>
+      <button class="lang" data-lang="ja" type="button">日本語</button>
+    </div>
+    <nav aria-label="Main menu">
+      <a class="nav-button" href="#" data-section="about">
+        <span class="symbol">✦</span><span class="nav-title" data-i18n="about">About Author</span><span class="nav-sub" data-i18n="aboutSub">The author behind the world</span>
+      </a>
+      <a class="nav-button" href="#" data-section="quiz">
+        <span class="symbol">☾</span><span class="nav-title" data-i18n="quiz">Clans Quiz</span><span class="nav-sub" data-i18n="quizSub">Discover your clan</span>
+      </a>
+      <a class="nav-button" href="#" data-section="chapters">
+        <span class="symbol">❧</span><span class="nav-title" data-i18n="chapters">Chapters</span><span class="nav-sub" data-i18n="chaptersSub">Enter the story</span>
+      </a>
+      <a class="nav-button" href="#" data-section="characters">
+        <span class="symbol">♧</span><span class="nav-title" data-i18n="characters">The Characters</span><span class="nav-sub" data-i18n="charactersSub">Meet the cast</span>
+      </a>
+    </nav>
+    <div class="ornament" style="margin-top:28px">✧ ─── ❖ ─── ✧</div>
+    <footer>✦ CRIMSON &amp; GOLD ✦</footer>
+  </div>
+  <p class="note" data-i18n="note">Theme preview only. The four menu links are placeholders until their pages are added.</p>
+</main>
+<script>
+const words={
+ en:{eyebrow:"A WORLD OF ASHES AND REVOLUTION",subtitle:"Revolution in the Age of Ashes",choose:"CHOOSE YOUR LANGUAGE · 言語を選択 · اختر لغتك",about:"About Author",aboutSub:"The author behind the world",quiz:"Clans Quiz",quizSub:"Discover your clan",chapters:"Chapters",chaptersSub:"Enter the story",characters:"The Characters",charactersSub:"Meet the cast",note:"Theme preview only. The four menu links are placeholders until their pages are added."},
+ ar:{eyebrow:"عالم من الرماد والثورة",subtitle:"ثورة في عصر الرماد",choose:"اختر لغتك",about:"عن الكاتبة",aboutSub:"الكاتبة وراء هذا العالم",quiz:"اختبار العشائر",quizSub:"اكتشف عشيرتك",chapters:"الفصول",chaptersSub:"ادخل إلى الحكاية",characters:"الشخصيات",charactersSub:"تعرّف على الشخصيات",note:"هذه معاينة للثيم فقط. روابط الأقسام تجريبية حتى تُضاف صفحاتها."},
+ ja:{eyebrow:"灰と革命の世界",subtitle:"灰の時代の革命",choose:"言語を選択",about:"作者について",aboutSub:"この世界を描く作者",quiz:"一族診断",quizSub:"あなたの一族を見つけよう",chapters:"各話",chaptersSub:"物語の世界へ",characters:"登場人物",charactersSub:"登場人物を知る",note:"これはテーマのプレビューです。各ページを追加するまで、メニューリンクは仮のものです。"}
+};
+function setLanguage(lang){
+ document.documentElement.lang=lang;
+ document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.querySelectorAll("[data-i18n]").forEach(el=>{const key=el.dataset.i18n;if(words[lang][key])el.textContent=words[lang][key]});
+ document.querySelectorAll(".lang").forEach(btn=>btn.classList.toggle("active",btn.dataset.lang===lang));
+}
+document.querySelectorAll(".lang").forEach(btn=>btn.addEventListener("click",()=>setLanguage(btn.dataset.lang)));
+document.querySelectorAll(".nav-button").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const lang=document.documentElement.lang;const names={about:words[lang].about,quiz:words[lang].quiz,chapters:words[lang].chapters,characters:words[lang].characters};alert(names[a.dataset.section]+" — "+(lang==="ar"?"ستُضاف هذه الصفحة لاحقًا.":lang==="ja"?"このページは後で追加されます。":"This page will be added later."));}));
+</script>
+</body>
+</html>
