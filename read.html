@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#520b17">
+<title>Fairia Academy | Read Novel</title>
+
+<style>
+:root {
+  --crimson: #520b17;
+  --deep: #30050d;
+  --panel: #690e20;
+  --gold: #d6b45d;
+  --cream: #fff0d8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at top, #78172a 0%, var(--deep) 75%);
+  color: var(--cream);
+  font-family: Georgia, "Times New Roman", serif;
+  min-height: 100vh;
+}
+
+.ornament {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--gold),
+    #fff0b5,
+    var(--gold),
+    transparent
+  );
+  z-index: 5;
+}
+
+.ornament.left { left: 0; }
+.ornament.right { right: 0; }
+
+header {
+  text-align: center;
+  padding: 35px 18px 24px;
+  border-bottom: 1px solid var(--gold);
+  background: rgba(30, 0, 7, 0.45);
+}
+
+.symbol {
+  color: var(--gold);
+  font-size: 22px;
+  letter-spacing: 7px;
+}
+
+h1 {
+  color: var(--gold);
+  font-size: clamp(25px, 7vw, 39px);
+  letter-spacing: 3px;
+  margin: 14px 0 8px;
+}
+
+.subtitle {
+  color: #e8c9c9;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.home {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--gold);
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  padding: 9px 17px;
+  border-radius: 4px;
+}
+
+main {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 25px 22px 35px;
+}
+
+.chapter-label {
+  text-align: center;
+  color: var(--gold);
+  letter-spacing: 4px;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 27px;
+  line-height: 1.5;
+  color: var(--cream);
+  margin: 15px 0 22px;
+}
+
+.gold-line {
+  width: 100px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 28px;
+}
+
+.story {
+  background: rgba(88, 10, 27, 0.62);
+  border: 1px solid rgba(214, 180, 93, 0.65);
+  border-radius: 5px;
+  padding: 25px 21px;
+  font-size: 17px;
+  line-height: 2;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  min-height: 250px;
+}
+
+.story p {
+  margin-top: 0;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.navigation a,
+.navigation button {
+  flex: 1;
+  text-align: center;
+  font: inherit;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--gold);
+  background: #390610;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 13px 8px;
+  cursor: pointer;
+}
+
+.navigation button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+footer {
+  text-align: center;
+  padding: 24px 15px 35px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+
+footer .signature {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+@media (max-width: 420px) {
+  main { padding-left: 17px; padding-right: 17px; }
+  .story { padding: 20px 16px; font-size: 16px; }
+  h2 { font-size: 23px; }
+}
+</style>
+</head>
+
+<body>
+<div class="ornament left"></div>
+<div class="ornament right"></div>
+
+<header>
+  <div class="symbol">☾ ✦ ❖ ✦ ☽</div>
+  <h1>FAIRIA ACADEMY</h1>
+  <div class="subtitle">
+    Revolution in the Age of Ashes<br>
+    フェリア学園：灰の時代の革命
+  </div>
+  <a class="home" href="index.html">← Back to Home</a>
+</header>
+
+<main>
+  <div class="chapter-label" id="chapterNumber">
+    CHAPTER 01
+  </div>
+
+  <h2 id="chapterTitle">Your Chapter Title</h2>
+  <div class="gold-line"></div>
+
+  <article class="story" id="storyText">Your chapter text will appear here.
+
+Replace this sample with the text of your chapter when you are ready.</article>
+
+  <nav class="navigation">
+    <button id="previousButton" onclick="changeChapter(-1)">
+      ← Previous
+    </button>
+    <button id="nextButton" onclick="changeChapter(1)">
+      Next →
+    </button>
+  </nav>
+</main>
+
+<footer>
+  <div>✦ ━━━━━━━ ☾ ❖ ☽ ━━━━━━━ ✦</div>
+  <div class="signature">By Anya Sensei</div>
+  <div style="margin-top:10px;font-size:11px;">
+    © Fairia Academy
+  </div>
+</footer>
+
+<script>
+/*
+  Add each chapter's title and text here.
+  The first chapter is a temporary sample.
+*/
+const chapters = [
+  {
+    title: "Your Chapter Title",
+    text: "Your chapter text will appear here.\n\nReplace this sample with your real chapter."
+  }
+];
+
+let currentChapter = 0;
+
+function renderChapter() {
+  const chapter = chapters[currentChapter];
+
+  document.getElementById("chapterNumber").textContent =
+    "CHAPTER " + String(currentChapter + 1).padStart(2, "0");
+
+  document.getElementById("chapterTitle").textContent =
+    chapter.title;
+
+  document.getElementById("storyText").textContent =
+    chapter.text;
+
+  document.getElementById("previousButton").disabled =
+    currentChapter === 0;
+
+  document.getElementById("nextButton").disabled =
+    currentChapter === chapters.length - 1;
+}
+
+function changeChapter(direction) {
+  const next = currentChapter + direction;
+
+  if (next >= 0 && next < chapters.length) {
+    currentChapter = next;
+    renderChapter();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+renderChapter();
+</script>
+</body>
+</html>
