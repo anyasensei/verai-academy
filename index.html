@@ -93,7 +93,7 @@
       <button class="lang" data-lang="ja" type="button">日本語</button>
     </div>
     <nav aria-label="Main menu">
-      <a class="nav-button" href="#" data-section="about">
+      <a class="nav-button" href="about.html" data-section="about">
         <span class="symbol">✦</span><span class="nav-title" data-i18n="about">About Author</span><span class="nav-sub" data-i18n="aboutSub">The author behind the world</span>
       </a>
       <a class="nav-button" href="quiz.html" data-section="quiz">
@@ -130,8 +130,10 @@ document.querySelectorAll(".lang").forEach(btn=>btn.addEventListener("click",()=
   if(section==="quiz"){
     e.preventDefault();
     window.location.href="quiz.html";
+  }else if(section==="about"){
+    e.preventDefault();
+    window.location.href="about.html";
   }else{
-    
 e.preventDefault();
 
 if (section === "quiz") {
