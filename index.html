@@ -131,11 +131,28 @@ document.querySelectorAll(".lang").forEach(btn=>btn.addEventListener("click",()=
     e.preventDefault();
     window.location.href="quiz.html";
   }else{
-    e.preventDefault();
-    const lang=document.documentElement.lang;
-    const names={about:words[lang].about,chapters:words[lang].chapters,characters:words[lang].characters};
-    alert(names[section]+" — "+(lang==="ar"?"ستُضاف هذه الصفحة لاحقًا.":lang==="ja"?"このページは後で追加されます。":"This page will be added later."));
-  }
+    
+e.preventDefault();
+
+if (section === "quiz") {
+  window.location.href = "quiz.html";
+} else if (section === "characters") {
+  window.location.href = "characters.html";
+} else {
+  const lang = document.documentElement.lang;
+  const names = {
+    about: words[lang].about,
+    chapters: words[lang].chapters
+  };
+
+  alert(names[section] + " — " +
+    (lang === "ar"
+      ? "ستُضاف هذه الصفحة لاحقًا."
+      : lang === "ja"
+      ? "このページは後で追加されます。"
+      : "This page will be added later."));
+}
+
 }));
 </script>
 </body>
