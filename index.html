@@ -135,7 +135,7 @@ document.querySelectorAll(".nav-button").forEach(a=>a.addEventListener("click",e
     const names={about:words[lang].about,chapters:words[lang].chapters,characters:words[lang].characters};
     alert(names[section]+" — "+(lang==="ar"?"ستُضاف هذه الصفحة لاحقًا.":lang==="ja"?"このページは後で追加されます。":"This page will be added later."));
   }
-}));(a=>a.addEventListener("click",e=>{e.preventDefault();const lang=document.documentElement.lang;const names={about:words[lang].about,quiz:words[lang].quiz,chapters:words[lang].chapters,characters:words[lang].characters};alert(names[a.dataset.section]+" — "+(lang==="ar"?"ستُضاف هذه الصفحة لاحقًا.":lang==="ja"?"このページは後で追加されます。":"This page will be added later."));}));
+}));
 </script>
 </body>
 </html>
